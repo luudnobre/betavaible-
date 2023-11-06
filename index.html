@@ -55,6 +55,15 @@
             display: none;
             margin-top: 20px;
         }
+
+        #spin-button {
+            display: none;
+            background-color: green;
+            padding: 10px 20px;
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -76,6 +85,7 @@
     <div id="result">
         <h2>Nome sorteado:</h2>
         <span id="winner"></span>
+        <button id="spin-button">Girar Novamente</button>
     </div>
 
     <div id="restart">
@@ -91,6 +101,7 @@
         const winnerSpan = document.getElementById("winner");
         const restartDiv = document.getElementById("restart");
         const resetBtn = document.getElementById("reset");
+        const spinButton = document.getElementById("spin-button");
 
         const names = [];
         let spinning = false;
@@ -113,6 +124,7 @@
                     spinDiv.style.display = "none";
                     resultDiv.style.display = "block";
                     restartDiv.style.display = "block";
+                    spinButton.style.display = "block";
                 }, 6000);
             }
         });
@@ -122,6 +134,11 @@
             winnerSpan.innerText = "";
             resultDiv.style.display = "none";
             restartDiv.style.display = "none";
+            startBtn.style.display = "block";
+        });
+
+        spinButton.addEventListener("click", () => {
+            spinButton.style.display = "none";
             startBtn.style.display = "block";
         });
     </script>
