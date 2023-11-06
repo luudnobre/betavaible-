@@ -24,7 +24,7 @@
         }
 
         #names {
-            display: none;
+            display: block;
             margin-top: 20px;
         }
 
@@ -35,7 +35,7 @@
         }
 
         #start {
-            display: none;
+            display: block;
             margin-top: 20px;
         }
 
@@ -75,8 +75,9 @@
         <h2>Coloque até 10 nomes:</h2>
         <input type="text" id="name" placeholder="Nome">
         <button id="add">Adicionar mais nomes</button>
-        <button id="start">Iniciar Sorteio</button>
     </div>
+
+    <button id="start">Iniciar Sorteio</button>
 
     <div id="spin">
         <h2>Girando...</h2>
@@ -123,7 +124,6 @@
                     winnerSpan.innerText = names[randomIndex];
                     spinDiv.style.display = "none";
                     resultDiv.style.display = "block";
-                    restartDiv.style.display = "block";
                     spinButton.style.display = "block";
                 }, 6000);
             }
