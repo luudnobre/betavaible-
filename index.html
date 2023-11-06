@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SORTEANDO-SE</title>
+    <link rel="icon" href="trevo.png" type="image/png">
+    <style>
+        body {
+            background: linear-gradient(to right, black, yellow, black);
+            font-family: 'Source Code Pro', monospace;
+            text-align: center;
+            color: white;
+        }
+
+        .header {
+            background: black;
+            padding: 10px 0;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        #names {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #names input {
+            width: 80%;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        #start {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #spin {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #result {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        #restart {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>SORTEANDO-SE</h1>
+    </div>
+
+    <div id="names">
+        <h2>Coloque até 10 nomes:</h2>
+        <input type="text" id="name" placeholder="Nome">
+        <button id="add">Adicionar mais nomes</button>
+        <button id="start">Iniciar Sorteio</button>
+    </div>
+
+    <div id="spin">
+        <h2>Girando...</h2>
+    </div>
+
+    <div id="result">
+        <h2>Nome sorteado:</h2>
+        <span id="winner"></span>
+    </div>
+
+    <div id="restart">
+        <button id="reset">Recomeçar Sorteio</button>
+    </div>
+
+    <script>
+        const nameInput = document.getElementById("name");
+        const addBtn = document.getElementById("add");
+        const startBtn = document.getElementById("start");
+        const spinDiv = document.getElementById("spin");
+        const resultDiv = document.getElementById("result");
+        const winnerSpan = document.getElementById("winner");
+        const restartDiv = document.getElementById("restart");
+        const resetBtn = document.getElementById("reset");
+
+        const names = [];
+        let spinning = false;
+
+        addBtn.addEventListener("click", () => {
+            if (nameInput.value.trim() !== "" && names.length < 10) {
+                names.push(nameInput.value);
+                nameInput.value = "";
+            }
+        });
+
+        startBtn.addEventListener("click", () => {
+            if (names.length >= 2 && !spinning) {
+                spinning = true;
+                startBtn.style.display = "none";
+                spinDiv.style.display = "block";
+                setTimeout(() => {
+                    const randomIndex = Math.floor(Math.random() * names.length);
+                    winnerSpan.innerText = names[randomIndex];
+                    spinDiv.style.display = "none";
+                    resultDiv.style.display = "block";
+                    restartDiv.style.display = "block";
+                }, 6000);
+            }
+        });
+
+        resetBtn.addEventListener("click", () => {
+            names.length = 0;
+            winnerSpan.innerText = "";
+            resultDiv.style.display = "none";
+            restartDiv.style.display = "none";
+            startBtn.style.display = "block";
+        });
+    </script>
+</body>
+</html>
